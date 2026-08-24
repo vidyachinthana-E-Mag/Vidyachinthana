@@ -46,7 +46,6 @@ export async function POST(req: Request) {
         volume,
         description,
         coverImage: coverImage || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800',
-        status,
         publishedAt: status === 'PUBLISHED' ? new Date() : null,
       },
     });

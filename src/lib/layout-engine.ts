@@ -76,15 +76,18 @@ export function countImages(node: any, rawString: string): number {
   return count;
 }
 
-export function generateLayout(article: Partial<Article> | string | any): LayoutConfig {
+export function generateLayout(
+  article: Partial<Article> | string | any,
+  optionalCategory?: string
+): LayoutConfig {
   let contentObj: any = null;
   let rawText = '';
-  let category = '';
+  let category = optionalCategory ? optionalCategory.toUpperCase() : '';
 
   if (typeof article === 'string') {
     rawText = article;
   } else if (article && typeof article === 'object') {
-    category = (article.category || '').toUpperCase();
+    category = category || (article.category || '').toUpperCase();
     if (typeof article.content === 'string') {
       try {
         contentObj = JSON.parse(article.content);

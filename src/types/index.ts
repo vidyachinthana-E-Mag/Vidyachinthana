@@ -7,6 +7,7 @@ export interface Author {
   name?: string | null;
   email?: string | null;
   image?: string | null;
+  avatar?: string | null;
   role?: Role | string;
   bio?: string | null;
 }
@@ -14,14 +15,16 @@ export interface Author {
 export interface Article {
   id: string;
   title: string;
-  slug: string;
+  slug?: string;
   excerpt?: string | null;
-  content: string | any;
+  content?: string | any;
   contentSi?: string | any | null;
   category: Category | string;
-  status: ArticleStatus | string;
+  status?: ArticleStatus | string;
   featuredImage?: string | null;
+  imageUrl?: string | null;
   readTime?: string | null;
+  date?: string | null;
   publishedAt?: string | Date | null;
   authorId?: string;
   author?: Author;
