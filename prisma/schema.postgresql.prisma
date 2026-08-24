@@ -1,11 +1,11 @@
 datasource db {
-  provider  = ""postgresql""
-  url       = env(""DATABASE_URL"")
-  directUrl = env(""DIRECT_URL"")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
-  provider = ""prisma-client-js""
+  provider = "prisma-client-js"
 }
 
 model Account {
@@ -42,18 +42,18 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          String    @default(""READER"") // OWNER, EDITOR, AUTHOR, READER
+  role          String    @default("READER") // OWNER, EDITOR, AUTHOR, READER
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
-  articles      Article[] @relation(""AuthorArticles"")
+  articles      Article[] @relation("AuthorArticles")
   comments      Comment[]
   
   authorRequests AuthorRequest[]
-  reviewedRequests AuthorRequest[] @relation(""ReviewerRequests"")
+  reviewedRequests AuthorRequest[] @relation("ReviewerRequests")
   notifications Notification[]
 }
 
@@ -82,13 +82,13 @@ model Article {
   excerpt       String?
   content       String         // JSON stringified
   contentSi     String?        // JSON stringified
-  category      String         @default(""SCIENCE"") // SCIENCE, EDUCATION, TECHNOLOGY, SCI_FI
-  status        String         @default(""DRAFT"")   // DRAFT, SUBMITTED, IN_REVIEW, APPROVED, PUBLISHED, ARCHIVED
+  category      String         @default("SCIENCE") // SCIENCE, EDUCATION, TECHNOLOGY, SCI_FI
+  status        String         @default("DRAFT")   // DRAFT, SUBMITTED, IN_REVIEW, APPROVED, PUBLISHED, ARCHIVED
   featuredImage String?
-  readTime      String?        @default(""5 min read"")
+  readTime      String?        @default("5 min read")
   publishedAt   DateTime?
   authorId      String
-  author        User           @relation(""AuthorArticles"", fields: [authorId], references: [id], onDelete: Cascade)
+  author        User           @relation("AuthorArticles", fields: [authorId], references: [id], onDelete: Cascade)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
@@ -136,9 +136,9 @@ model AuthorRequest {
   id             String   @id @default(cuid())
   userId         String
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  status         String   @default(""PENDING"") // PENDING, APPROVED, REJECTED
+  status         String   @default("PENDING") // PENDING, APPROVED, REJECTED
   reviewedById   String?
-  reviewedBy     User?    @relation(""ReviewerRequests"", fields: [reviewedById], references: [id])
+  reviewedBy     User?    @relation("ReviewerRequests", fields: [reviewedById], references: [id])
   comment        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -156,16 +156,16 @@ model Notification {
 }
 
 model SiteConfig {
-  id           String   @id @default(""default"")
-  siteName     String   @default(""Vidya Chinthana (??????? ??????)"")
-  tagline      String   @default(""Digital Science, Technology & Speculative Philosophy Magazine"")
+  id           String   @id @default("default")
+  siteName     String   @default("Vidya Chinthana")
+  tagline      String   @default("Digital Science, Technology & Speculative Philosophy Magazine")
   logoUrl      String?
   faviconUrl   String?
-  footerText   String   @default(""Vidya Chinthana — Exploring frontiers of science, synthetic consciousness, and Sri Lankan research archives."")
-  twitterUrl   String?  @default(""https://twitter.com/vidyachinthana"")
-  facebookUrl  String?  @default(""https://facebook.com/vidyachinthana"")
-  instagramUrl String?  @default(""https://instagram.com/vidyachinthana"")
-  githubUrl    String?  @default(""https://github.com/vidyachinthana"")
-  linkedinUrl  String?  @default(""https://linkedin.com/company/vidyachinthana"")
+  footerText   String   @default("Vidya Chinthana â€” Exploring frontiers of science, synthetic consciousness, and Sri Lankan research archives.")
+  twitterUrl   String?  @default("https://twitter.com/vidyachinthana")
+  facebookUrl  String?  @default("https://facebook.com/vidyachinthana")
+  instagramUrl String?  @default("https://instagram.com/vidyachinthana")
+  githubUrl    String?  @default("https://github.com/vidyachinthana")
+  linkedinUrl  String?  @default("https://linkedin.com/company/vidyachinthana")
   updatedAt    DateTime @updatedAt
 }
