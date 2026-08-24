@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-page: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-text-inverse: #FFFFFF;
+
+  --color-accent-cyan: #0284C7;
+  --color-accent-purple: #7C3AED;
+  --color-accent-gold: #D97706;
+  --color-accent-pink: #0D9488;
+  --color-accent-neon: #2563EB;
+  
+  --color-success: #059669;
+
+  --color-glass-bg: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(226, 232, 240, 0.8);
+  --color-glass-hover: rgba(255, 255, 255, 0.9);
+  --color-glass-glow: rgba(37, 99, 235, 0.12);
+
+  --color-category-science: #2563EB;
+  --color-category-education: #0D9488;
+  --color-category-technology: #7C3AED;
+  --color-category-sci-fi: #D97706;
+
+  --font-display: 'Orbitron', 'Space Grotesk', monospace;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --bg-page: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(226, 232, 240, 0.85);
+    --card-hover-bg: rgba(255, 255, 255, 0.95);
+    --glass-highlight: rgba(255, 255, 255, 0.8);
+    --accent-glow: rgba(37, 99, 235, 0.15);
+    background-color: #FFFFFF;
+    color: #0F172A;
+    font-family: var(--font-body);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html.dark {
+    --bg-page: #030712;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    --card-bg: rgba(15, 23, 42, 0.65);
+    --card-border: rgba(56, 189, 248, 0.2);
+    --card-hover-bg: rgba(30, 41, 59, 0.8);
+    --glass-highlight: rgba(0, 240, 255, 0.25);
+    --accent-glow: rgba(0, 240, 255, 0.25);
+    background-color: #030712;
+    color: #F8FAFC;
+  }
+}
+
+/* =========================================================================
+   Liquid Glass & Dynamic Island Effects
+   ========================================================================= */
+
+.liquid-glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--card-border);
+  box-shadow: 
+    0 10px 30px -10px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 var(--glass-highlight);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .liquid-glass {
+  box-shadow: 
+    0 12px 36px -8px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(0, 240, 255, 0.08),
+    inset 0 1px 0 rgba(0, 240, 255, 0.3);
+}
+
+.liquid-island {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.08),
+    0 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .liquid-island {
+  background: rgba(8, 14, 28, 0.78);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  box-shadow: 
+    0 20px 50px -12px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 240, 255, 0.15),
+    inset 0 1px 1px rgba(0, 240, 255, 0.35);
+}
+
+/* Interactive Card Hover Sheen */
+.liquid-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+}
+
+.liquid-card:hover {
+  transform: translateY(-4px);
+  background: var(--card-hover-bg);
+  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: 
+    0 20px 40px -12px rgba(0, 0, 0, 0.08),
+    0 0 20px var(--accent-glow);
+}
+
+.dark .liquid-card:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 
+    0 24px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 30px rgba(0, 240, 255, 0.25);
+}
+
+/* Animated Soundwave Frequency Bars */
+.sound-bar {
+  animation: wave 1.2s ease-in-out infinite alternate;
+}
+.sound-bar:nth-child(1) { animation-delay: 0.1s; }
+.sound-bar:nth-child(2) { animation-delay: 0.4s; }
+.sound-bar:nth-child(3) { animation-delay: 0.2s; }
+.sound-bar:nth-child(4) { animation-delay: 0.5s; }
+
+@keyframes wave {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+/* Radar Beacon & Sci-Fi Pulses */
+@keyframes radar-ping {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.radar-dot {
+  position: relative;
+}
+.radar-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 1.5px solid currentColor;
+  animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Holographic Shimmer */
+@keyframes holo-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.hologram-text {
+  background: linear-gradient(90deg, #2563EB, #7C3AED, #06B6D4, #2563EB);
+  background-size: 300% 100%;
+  animation: holo-shimmer 6s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .hologram-text {
+  background: linear-gradient(90deg, #00F0FF, #A855F7, #00FFA3, #00F0FF);
+  background-size: 300% 100%;
+  animation: holo-shimmer 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cyber Scanline Overlay */
+@keyframes cyber-scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.cyber-scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.8), transparent);
+  animation: cyber-scan 4s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+}
+.dark .group:hover .cyber-scanline {
+  opacity: 1;
+}
+
+/* Custom Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.45);
+}
+
+/* =========================================================================
+   Paththara (Magazine/Newspaper) Styles
+   ========================================================================= */
+
+.paththara-article {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-color: #faf9f6; /* Off-white newspaper color */
+  color: #1a1a1a;
+  position: relative;
+  z-index: 1;
+}
+
+.dark .paththara-article {
+  background-color: #121212;
+  color: #e0e0e0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+}
+
+/* Drop Cap for first paragraph */
+.paththara-content > p:first-of-type::first-letter {
+  font-family: var(--font-heading);
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  color: var(--color-accent-neon);
+  font-weight: bold;
+}
+
+.dark .paththara-content > p:first-of-type::first-letter {
+  color: #00F0FF;
+}
+
+/* Multi-column layout for desktop */
+.paththara-columns {
+  column-count: 1;
+  column-gap: 3rem;
+  column-rule: 1px dashed rgba(0, 0, 0, 0.1);
+  text-align: justify;
+}
+
+.dark .paththara-columns {
+  column-rule: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .paththara-columns {
+    column-count: 2;
+  }
+}
+
+/* Print CSS */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .paththara-printable, .paththara-printable * {
+    visibility: visible;
+  }
+  .paththara-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: black !important;
+    background: white !important;
+  }
+  .paththara-columns {
+    column-rule: 1px solid black !important;
+  }
+  /* Hide UI elements */
+  nav, footer, button, .no-print {
+    display: none !important;
+  }
+}
+

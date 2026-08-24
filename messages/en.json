@@ -1,0 +1,10 @@
+{
+  "nav": {
+    "home": "Home",
+    "archives": "Archive",
+    "issues": "Issues"
+  },
+  "hero": {
+    "beginReading": "Begin Reading"
+  }
+}
